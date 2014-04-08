@@ -363,8 +363,14 @@
         function (txt) { /* global jade: true */ return jade.compile(txt); });
 
     /*  Mustache (efficient: pre-compilation, complete: data support)  */
-    reg("mustache", "Mustache", "http://mustache.github.io/", "Mustache.compile",
-        function (txt) { /* global Mustache: true */ return Mustache.compile(txt); });
+    reg("mustache", "Mustache", "http://mustache.github.io/", function () { return isfn("Mustache.parse") && isfn("Mustache.render"); },
+        function(txt) { /* See https://github.com/janl/mustache.js/issues/346#issuecomment-29764332 for more information. */
+                        Mustache.parse(txt);
+                        return function (view, partials) {
+                            return Mustache.render(txt, view, partials);
+                        };
+        }
+    );
 
     /*  Walrus (efficient: pre-compilation, complete: data support)  */
     reg("walrus", "Walrus", "http://documentup.com/jeremyruppel/walrus/", "Walrus.Parser.parse",
