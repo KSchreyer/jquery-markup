@@ -390,8 +390,8 @@
         function (txt) { /* global fmt: true */ return fmt(txt); });
 
     /*  Hogan (efficient: pre-compilation, complete: data support)  */
-    reg("hogan", "Twitter Hogan", "http://twitter.github.io/hogan.js/", "hogan.compile",
-        function (txt) { /* global hogan: true */ var tmpl = hogan.compile(txt);
+    reg("hogan", "Twitter Hogan", "http://twitter.github.io/hogan.js/", "Hogan.compile",
+        function (txt) { /* global hogan: true */ var tmpl = Hogan.compile(txt);
                          return function (data) { return tmpl.render(data); }; });
 
     /*  Underscore Template (efficient: pre-compilation, complete: data support)  */
